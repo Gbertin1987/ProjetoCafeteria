@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrinho - Checkpoint Coffee</title>
+  <link rel="stylesheet" href="carrinho.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>🛒 Carrinho <span id="contador"></span></h1>
+
+  <div id="lista"></div>
+
+  <h2 id="total"></h2>
+
+  <button onclick="finalizar()">Finalizar Compra</button>
+  <button onclick="voltar()">Voltar ao Cardápio</button>
+</div>
+
+<script>
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function render(){
+  const lista = document.getElementById('lista');
+  let total = 0;
+  let totalItens = 0;
+
+  lista.innerHTML = carrinho.map(item => {
+    const subtotal = item.preco * item.qtd;
+    total += subtotal;
+    totalItens += item.qtd;
+
+    return `
+      <div class="item">
+        <h3>${item.nome}</h3>
+        <p>Qtd: ${item.qtd}</p>
+        <p>Preço: R$ ${item.preco}</p>
+        <p><strong>Subtotal: R$ ${subtotal}</strong></p>
+
+        <div class="botoes">
+          <button onclick="mais(${item.id})">+</button>
+          <button onclick="menos(${item.id})">-</button>
+          <button onclick="remover(${item.id})">Remover</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('total').innerText = "Total: R$ " + total;
+  document.getElementById('contador').innerText = `(${totalItens} itens)`;
+
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+function animar(){
+  document.body.classList.add("flash");
+  setTimeout(()=> document.body.classList.remove("flash"), 200);
+}
+
+function mais(id){
+  carrinho.find(i => i.id === id).qtd++;
+  animar();
+  render();
+}
+
+function menos(id){
+  const item = carrinho.find(i => i.id === id);
+  item.qtd--;
+
+  if(item.qtd <= 0){
+    carrinho = carrinho.filter(i => i.id !== id);
+  }
+
+  animar();
+  render();
+}
+
+function remover(id){
+  carrinho = carrinho.filter(i => i.id !== id);
+  animar();
+  render();
+}
+
+function finalizar(){
+  window.location.href = "pagamento.html";
+}
+
+function voltar(){
+  window.location.href = "cardapio.html";
+}
+
+render();
+</script>
+
+</body>
+</html>

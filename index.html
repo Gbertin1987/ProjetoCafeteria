@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro - Checkpoint Coffee</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="icon">
+    <img src="img/logo1.jpg" alt="Logo Checkpoint Coffee">
+  </div>
+
+  <h1>Checkpoint Coffee</h1>
+  <p class="subtitle">Crie seu save antes da próxima fase...</p>
+
+  <form onsubmit="cadastrar(event)">
+    <input type="text" id="nome" placeholder="Nome do Jogador" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="senha" placeholder="Senha" required>
+    <input type="password" id="confirmar" placeholder="Confirmar Senha" required>
+
+    <button type="submit">Criar Conta</button>
+  </form>
+
+  <div class="loading" id="loading">Salvando progresso...</div>
+
+  <div class="footer">
+    Já tem conta? <a href="login.html">Entrar</a>
+  </div>
+</div>
+
+<script>
+function cadastrar(e) {
+  e.preventDefault();
+
+  const senha = document.getElementById('senha').value;
+  const confirmar = document.getElementById('confirmar').value;
+
+  if (senha !== confirmar) {
+    alert('As senhas não coincidem!');
+    return;
+  }
+
+  document.getElementById('loading').classList.add('active');
+
+  setTimeout(() => {
+    alert('Conta criada com sucesso!');
+    window.location.href = 'cardapio.html';
+  }, 1500);
+}
+</script>
+
+</body>
+</html>

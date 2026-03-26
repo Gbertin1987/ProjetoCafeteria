@@ -1,0 +1,111 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Destaques da semana - Checkpoint Coffee</title>
+  <link rel="stylesheet" href="stylecardapio.css">
+</head>
+<body>
+
+<button class="btn-area" onclick="irArea()">🏪 Nossa Loja Física</button>
+
+<div class="container">
+  <h1>Destaques da semana</h1>
+  <button onclick="irCarrinho()">🛒 Ver Carrinho</button>
+
+  <div class="grid-cardapio">
+
+    <div class="card">
+      <img src="img/cafe1.jpg">
+      <h3>Café 1</h3>
+      <p>R$ 6</p>
+      <button onclick="addCarrinho(1,'Café 1',6)">Adicionar</button>
+    </div>
+
+    <div class="card">
+      <img src="img/cafe2.jpg">
+      <h3>Café 2</h3>
+      <p>R$ 7</p>
+      <button onclick="addCarrinho(2,'Café 2',7)">Adicionar</button>
+    </div>
+
+    <div class="card">
+      <img src="img/cafe3.jpg">
+      <h3>Café 3</h3>
+      <p>R$ 8</p>
+      <button onclick="addCarrinho(3,'Café 3',8)">Adicionar</button>
+    </div>
+
+    <div class="card">
+      <img src="img/cafe4.jpg">
+      <h3>Café 4</h3>
+      <p>R$ 9</p>
+      <button onclick="addCarrinho(4,'Café 4',9)">Adicionar</button>
+    </div>
+
+    <div class="card">
+      <img src="img/cafe5.jpg">
+      <h3>Café 5</h3>
+      <p>R$ 10</p>
+      <button onclick="addCarrinho(5,'Café 5',10)">Adicionar</button>
+    </div>
+
+    <div class="card">
+      <img src="img/cafe6.jpg">
+      <h3>Café 6</h3>
+      <p>R$ 11</p>
+      <button onclick="addCarrinho(6,'Café 6',11)">Adicionar</button>
+    </div>
+
+    <div class="card">
+      <img src="img/cafe7.jpg">
+      <h3>Café 7</h3>
+      <p>R$ 12</p>
+      <button onclick="addCarrinho(7,'Café 7',12)">Adicionar</button>
+    </div>
+
+    <div class="card">
+      <img src="img/cafe8.jpg">
+      <h3>Café 8</h3>
+      <p>R$ 13</p>
+      <button onclick="addCarrinho(8,'Café 8',13)">Adicionar</button>
+    </div>
+	
+	<div class="card">
+      <img src="img/cafe9.jpg">
+      <h3>Café 8</h3>
+      <p>R$ 13</p>
+      <button onclick="addCarrinho(8,'Café 8',13)">Adicionar</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function addCarrinho(id,nome,preco){
+  const item = carrinho.find(i=>i.id===id);
+
+  if(item){
+    item.qtd++;
+  } else {
+    carrinho.push({id,nome,preco,qtd:1});
+  }
+
+  localStorage.setItem('carrinho',JSON.stringify(carrinho));
+  alert('Item adicionado ao carrinho!');
+}
+
+function irCarrinho(){
+  window.location.href = 'carrinho.html';
+}
+function irArea(){
+  window.location.href = 'nossaarea.html';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Checkpoint Coffee</title>
+  <link rel="stylesheet" href="stylelogin.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="icon">
+    <img src="img/logo1.jpg" alt="Logo Checkpoint Coffee">
+  </div>
+  <h1>Checkpoint Coffee</h1>
+  <p class="subtitle">Continue de onde você parou...</p>
+
+  <form onsubmit="login(event)">
+    <input type="email" id="emailLogin" placeholder="Email" required>
+    <input type="password" id="senhaLogin" placeholder="Senha" required>
+
+    <button type="submit">Entrar</button>
+  </form>
+
+  <div class="loading" id="loadingLogin">Carregando save...</div>
+
+  <div class="footer">
+    Novo jogador? <a href="cadastro.html">Criar conta</a>
+  </div>
+</div>
+
+<script>
+function login(e) {
+  e.preventDefault();
+
+  document.getElementById('loadingLogin').classList.add('active');
+
+  setTimeout(() => {
+    alert('Login realizado!');
+    window.location.href = 'cardapio.html';
+  }, 1500);
+}, 1500);
+}
+</script>
+
+</body>
+</html>
